@@ -1,9 +1,18 @@
 <script setup>
-import WebTitle from "./components/WebTitle.vue";
-import UserIcon from "./components/UserIcon.vue";
-import Post from "./components/Post.vue";
-import PlusIcon from "./components/PlusIcon.vue";
-import Posts from "./components/Posts.vue";
+  import { ref } from "vue";
+  import WebTitle from "./components/WebTitle.vue";
+  import UserIcon from "./components/UserIcon.vue";
+  import Post from "./components/Post.vue";
+  import PlusIcon from "./components/PlusIcon.vue";
+  import Posts from "./components/Posts.vue";
+  import Camera from "./components/Camera.vue";
+
+  const camera_modal = ref();
+
+  function openModal() {
+    camera_modal.value.is_modal_opened = true;
+  }
+
 </script>
 
 <template>
@@ -18,11 +27,12 @@ import Posts from "./components/Posts.vue";
     </header>
 
     <main class="pt-20 pb-3 h-screen">
+      <Camera ref="camera_modal" />
       <Posts />
     </main>
     <footer class="flex justify-center py-5 fixed bottom-0 inset-x-0">
       <div class="flex justify-end w-4/5">
-        <PlusIcon />
+        <PlusIcon @click="openModal()" />
       </div>
     </footer>
   </div>
