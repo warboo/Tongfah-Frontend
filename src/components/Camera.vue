@@ -1,5 +1,5 @@
 <script setup>
-    import { ref, watch, nextTick } from "vue";
+    import { ref, watch, nextTick, defineEmits } from "vue";
     const height = 512;
     const width = 512;
 
@@ -12,6 +12,7 @@
     let imageFile;
     
     defineExpose({ is_modal_opened });
+    const emit = defineEmits( ["post-created"] );
 
     // ------- Camera -------
 
@@ -103,13 +104,11 @@
 
     function postBtn_Util() {
         navigator.geolocation.getCurrentPosition(addItem);
-        this.$emit("post-created");
         cancel_Util();
     }
 
     const addItem = async (position) => {
         console.log(position.coords);
-        // const img = document.getElementById("myfile").files[0];
         
         const formData = new FormData();
         formData.append("owner", "Veeliw");
@@ -124,6 +123,7 @@
         const response = await fetch(import.meta.env.VITE_BACKEND + "/posts/post", options)
             .catch((error) => console.error(error));
         console.log("Response:", await response.json());
+        emit("post-created");
     }
 
 </script>

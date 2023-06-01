@@ -1,17 +1,19 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, onMounted } from "vue";
   import Post from "./Post.vue";
   import { Buffer } from "buffer";
-    window.Buffer = window.Buffer || Buffer;
+  window.Buffer = window.Buffer || Buffer;
 
   const posts = ref([]);
+
+  onMounted(async () => {
+    await getData();
+  });
 
   function image_Util(image) {
     const buffer = image.data;
     const base64 = Buffer.from(buffer).toString("base64");
-    const mimeType = "image/jpeg";
-
-    return "data: image/jpeg;base64," + base64;
+    return "data: image/png;base64," + base64;
   }
 
   function time_Util(date) {
@@ -43,7 +45,6 @@
   }
 
   async function getData() {
-    console.log(import.meta.env.VITE_BACKEND);
     const res = await fetch(import.meta.env.VITE_BACKEND + "/posts");
     const finalRes = await res.json();
     posts.value = finalRes;
@@ -51,12 +52,24 @@
     console.log(finalRes);
   }
 
- getData()
+  async function deletePost(id) {
+    const options = {
+        method: "DELETE",
+    };
+    const response = await fetch(import.meta.env.VITE_BACKEND + "/posts/delete/" + id, options)
+    .then(() => {
+      posts.value = posts.value.filter(post => post._id !== id);
+    })
+        .catch((error) => console.error(error));
+    console.log("Response:", await response.json());
+  }
+
 </script>
 
 <template>
-    <Post v-for="post in posts"
+    <Post v-for="post in posts" @post-deleted="deletePost"
         :key=post._id
+        :id=post._id
         :owner=post.owner 
         :time=time_Util(post.date)
         :date=date_Util(post.date)

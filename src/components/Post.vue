@@ -1,18 +1,27 @@
 <script setup>
-defineProps({
-  owner: { type: String, required: true },
-  time: { type: String, required: true },
-  date: { type: String, required: true },
-  location: { type: String, required: true },
-  condition: { type: String, required: true },
-  temp: { type: String, required: true  },
-  wind: { type: String, required: true  },
-  precip: { type: String, required: true  },
-  visibility: { type: String, required: true  },
-  uv: { type: String, required: true },
-  pm25: { type: String, required: true },
-  img: { type: String, required: true }
-})
+    import { defineEmits } from "vue";
+
+    defineProps({
+        id: { type: String, required: true },
+        owner: { type: String, required: true },
+        time: { type: String, required: true },
+        date: { type: String, required: true },
+        location: { type: String, required: true },
+        condition: { type: String, required: true },
+        temp: { type: String, required: true  },
+        wind: { type: String, required: true  },
+        precip: { type: String, required: true  },
+        visibility: { type: String, required: true  },
+        uv: { type: String, required: true },
+        pm25: { type: String, required: true },
+        img: { type: String, required: true }
+    });
+
+    const emit = defineEmits(["post-deleted"]);
+
+    function deletePost(id) {
+        emit("post-deleted", id);
+    }
 </script>
 
 <template>
@@ -39,9 +48,12 @@ defineProps({
                     </table>
                 </div>
             </div>
-            <div class="text-sm text-gray-400 text-right flex-auto">
-                <p>{{ time }}</p>
-                <p>{{ date }}</p>
+            <div class="flex flex-col justify-between items-end text-sm text-gray-400 text-right flex-auto">
+                <div>
+                    <p>{{ time }}</p>
+                    <p>{{ date }}</p>
+                </div>
+                <img src="../assets/bin.png" class="h-5 w-5" @click="deletePost(id)" />
             </div>
         </div>
     </div>
