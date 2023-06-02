@@ -1,10 +1,12 @@
 <script setup>
   import { ref, onMounted } from "vue";
   import Post from "./Post.vue";
+  import Loader from "./Loader.vue";
   import { Buffer } from "buffer";
   window.Buffer = window.Buffer || Buffer;
 
   const posts = ref([]);
+  const loading = ref(false);
 
   onMounted(async () => {
     await getData();
@@ -45,29 +47,31 @@
   }
 
   async function getData() {
+    loading.value = true;
     const res = await fetch(import.meta.env.VITE_BACKEND + "/posts");
     const finalRes = await res.json();
     posts.value = finalRes;
-    console.log("here is what we got...");
-    console.log(finalRes);
+    loading.value = false;
   }
 
   async function deletePost(id) {
+    loading.value = true;
     const options = {
         method: "DELETE",
     };
     const response = await fetch(import.meta.env.VITE_BACKEND + "/posts/delete/" + id, options)
-    .then(() => {
-      posts.value = posts.value.filter(post => post._id !== id);
-    })
-        .catch((error) => console.error(error));
-    console.log("Response:", await response.json());
+      .then(() => {
+        posts.value = posts.value.filter(post => post._id !== id);
+      })
+      .catch((error) => console.error(error));
+    loading.value = false;
   }
 
 </script>
 
 <template>
-    <Post v-for="post in posts" @post-deleted="deletePost"
+    <Loader v-if="loading" />
+    <Post v-else v-for="post in posts" @post-deleted="deletePost"
         :key=post._id
         :id=post._id
         :owner=post.owner 

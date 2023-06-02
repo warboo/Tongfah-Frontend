@@ -18,7 +18,6 @@
 
     watch(is_modal_opened, (newVal, oldVal) => {
         if (newVal === true) {
-            console.log("Running watcher...")
             playBtn_Util();
         }
     });
@@ -108,8 +107,6 @@
     }
 
     const addItem = async (position) => {
-        console.log(position.coords);
-        
         const formData = new FormData();
         formData.append("owner", "Veeliw");
         formData.append("latitude", position.coords.latitude);
@@ -122,7 +119,6 @@
         };
         const response = await fetch(import.meta.env.VITE_BACKEND + "/posts/post", options)
             .catch((error) => console.error(error));
-        console.log("Response:", await response.json());
         emit("post-created");
     }
 
