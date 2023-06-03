@@ -1,6 +1,4 @@
 <script setup>
-    import { defineEmits } from "vue";
-
     defineProps({
         id: { type: String, required: true },
         owner: { type: String, required: true },

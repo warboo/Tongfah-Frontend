@@ -1,5 +1,5 @@
 <script setup>
-    import { ref, watch, nextTick, defineEmits } from "vue";
+    import { ref, watch, nextTick } from "vue";
     const height = 512;
     const width = 512;
 
