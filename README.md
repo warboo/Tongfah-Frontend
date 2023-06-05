@@ -1,6 +1,9 @@
-# frontend
+# Tongfah-Frontend
+This is the frontend application for Tongfah. It is built with Vue 3 in Vite and Tailwind.
 
-This template should help get you started developing with Vue 3 in Vite.
+> Tongfah is a web application that allows users to share and explore beautiful sky images from various locations. Each post on Tongfah contains a captivating sky image and the accompanying weather information of the place where the image was taken.
+
+> Weather information gives viewers a better understanding of weather-related factors that might have influenced the scene. This context helps users connect with the image on a deeper level.
 
 ## Recommended IDE Setup
 
