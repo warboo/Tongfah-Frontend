@@ -1,7 +1,7 @@
 <script setup>
     import { ref, watch, nextTick } from "vue";
-    const height = 512;
-    const width = 512;
+    const height = 128;
+    const width = 128;
 
     const canvas = ref();
     const player = ref();
@@ -34,8 +34,8 @@
             .getUserMedia({
                 video: {
                     facingMode: "environment",
-                    width: { exact: 512 },
-                    height: { exact: 512 }
+                    width: { exact: width },
+                    height: { exact: height }
                 },
                 audio: false
             })
