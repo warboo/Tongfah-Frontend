@@ -1,7 +1,10 @@
 <script setup>
     import { ref, watch, nextTick } from "vue";
-    const height = 128;
-    const width = 128;
+    const height = 512;
+    const width = 512;
+
+    const compressed_height = 128;
+    const compressed_width = 128;
 
     const canvas = ref();
     const player = ref();
@@ -60,14 +63,23 @@
             is_taken.value = true;
 
             nextTick(() => {
-                canvas.value.width = width;
-                canvas.value.height = height;   
+                // set resolution for download
+                canvas.value.width = compressed_width;
+                canvas.value.height = compressed_height;   
 
                 const context = canvas.value.getContext("2d");
-                context.drawImage(player_value, 0, 0, width, height);
+                context.drawImage(player_value, 0, 0, compressed_width, compressed_height);
 
                 const imageData = canvas.value.toDataURL("image/png");
                 imageFile = dataURLtoFile(imageData, "image.png");
+
+                context.clearRect(0, 0, canvas.compressed_width, canvas.compressed_height);
+
+                // set resolution for visualization
+                canvas.value.width = width;
+                canvas.value.height = height;   
+
+                context.drawImage(player_value, 0, 0, width, height);
 
                 stopBtn_Util();
             }); 
