@@ -78,6 +78,7 @@
         :time=time_Util(post.date)
         :date=date_Util(post.date)
         :location=post.location
+        :location_url=post.location_url
         :condition=post.condition
         :temp=post.temp.toString()
         :wind=post.wind.toString()

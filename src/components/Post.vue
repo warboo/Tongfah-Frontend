@@ -5,6 +5,7 @@
         time: { type: String, required: true },
         date: { type: String, required: true },
         location: { type: String, required: true },
+        location_url: { type: String, require: true },
         condition: { type: String, required: true },
         temp: { type: String, required: true  },
         wind: { type: String, required: true  },
@@ -28,7 +29,10 @@
             <img :src="img" class="h-32 rounded-lg mr-5" />
             <div>
                 <div class="text-sm">
-                    <h2 class="font-bold text-xl">{{ location }}</h2>
+                    <a :href="location_url" class="flex">
+                        <img src="../assets/google-maps.png" class="mr-2 h-5 w-5" />
+                        <h2 class="font-bold text-xl">{{ location }}</h2>
+                    </a>
                     <h3 class="font-bold bg-gray-300 rounded-lg px-2 py-0.5 my-1 w-fit">{{ condition }}</h3>
                     <table>
                         <tr>
@@ -51,7 +55,7 @@
                     <p>{{ time }}</p>
                     <p>{{ date }}</p>
                 </div>
-                <img src="../assets/bin.png" class="h-5 w-5" @click="deletePost(id)" />
+                <img src="../assets/bin.png" class="h-5 w-5 cursor-pointer" @click="deletePost(id)" />
             </div>
         </div>
     </div>

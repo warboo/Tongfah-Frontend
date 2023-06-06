@@ -27,7 +27,7 @@
         <div class="flex justify-center bg-white pt-5 pb-3 back drop-shadow-md">
           <div class="flex items-center w-4/5">
             <WebTitle class="text-2xl flex-auto" />
-            <UserIcon />
+            <UserIcon class="cursor-no-drop" />
           </div>
         </div>
       </header>
@@ -39,7 +39,7 @@
       </main>
       <footer class="flex justify-center py-5 fixed bottom-0 inset-x-0">
         <div class="flex justify-end w-4/5">
-          <PlusIcon @click="openModal" />
+          <PlusIcon @click="openModal" class="cursor-pointer" />
         </div>
       </footer>
     </div>
