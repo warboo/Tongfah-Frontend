@@ -5,6 +5,9 @@ This is the frontend application for Tongfah. It is built with Vue 3 in Vite and
 
 > Weather information gives viewers a better understanding of weather-related factors that might have influenced the scene. This context helps users connect with the image on a deeper level.
 
+> [!NOTE]
+> The backend spins down after inactivity, causing a couple of minutes delay.
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
